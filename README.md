@@ -1,4 +1,4 @@
-# nimble-tag-versioned
+# Nimble Badge
 
 Hi! This fork of [@yglukhov](https://github.com/yglukhov)'s [nimble-tag repository](https://github.com/yglukhov/nimble-tag) extends the original design by Amy Shaw (in [this PR](https://github.com/yglukhov/nimble-tag/pull/1)) by adding versioning to the tag.
 
