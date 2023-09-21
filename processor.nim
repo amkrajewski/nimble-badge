@@ -80,6 +80,9 @@ when isMainModule:
                         continue
                     if clinetResponse.status == "200 OK":
                         let githubTagJSON = parseJSON(clinetResponse.body)
+                        if githubTagJSON.kind != JArray:
+                            echo "-> 200 - but not JArray of tags: " & name
+                            continue
                         if githubTagJSON.len == 0:
                             echo "-> 200 - but no tags for: " & name
                             continue
