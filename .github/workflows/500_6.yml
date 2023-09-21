@@ -24,7 +24,7 @@ jobs:
       - name: Generate Badges
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: nim c -r -d:ssl processor.nim -db 6
+        run: nim c -r -d:ssl processor.nim -db 6 -vrb
       - name: Commit changes with Add & Commit
         uses: EndBug/add-and-commit@v9
         with:
