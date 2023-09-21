@@ -70,7 +70,7 @@ when isMainModule:
                         if isNil version:
                             continue
                         else:
-                            writeFile("badges/" & package["name"].getStr() & ".svg", adjustVersion(version.getStr()))
+                            writeFile("/home/runner/work/nimble-badge/nimble-badge/badges/" & package["name"].getStr() & ".svg", adjustVersion(version.getStr()))
                             updatedN += 1
         echo "Updated " & $updatedN & " badges"
 
