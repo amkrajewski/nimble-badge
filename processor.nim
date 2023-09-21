@@ -3,21 +3,18 @@ import std/os
 import std/httpclient
 import std/json
 
-let entireFile = readFile("nimble.svg")
+let rootSVG = readFile("nimble.svg")
 
 proc adjustVersion(v: string): string =
-    let badgeTemp = entireFile.replace("v1.11.11", v)
     let displacement: float = 145 + ((v.len.float - 8.0) * 23)
-    result = badgeTemp.replace("154.131839", $displacement)
-
+    result = rootSVG.replace("v1.11.11", v).replace("154.131839", $displacement)
 
 proc echoHelp() = echo """
-To use form command line, provide parameters. Currently supported usage:
+To use form command line, plase provide parameters. Currently supported usage:
 
 --deployBadges N    | -db N    --> Deploy badges for 500 packages in the nimble packages repo starting 
                                    from Nth 500 (N<=9 for now). This is to avoid rate limiting.
 --versionLengthTest | -vlt     --> Test how version length affects text placement
-
 
 """
 
@@ -27,7 +24,7 @@ when isMainModule:
         echoHelp()
 
     if "--versionLengthTest" in args or "-vlt" in args:
-
+        echo "Testing how version length affects text placement"
         writeFile("testFiles/somenimbleV1.svg", adjustVersion("v1"))
         writeFile("testFiles/somenimbleV11.svg", adjustVersion("v1.1"))
         writeFile("testFiles/somenimbleV111.svg", adjustVersion("v1.1.1"))
@@ -62,24 +59,31 @@ when isMainModule:
                 echo "Reached end of packages"
                 break
             let package = packagesJSON[i]
+            let name = package["name"].getStr()
             if i == 0:
                 echo "First package JSON:", $package
             if isNil package{"alias"}:
                 let url = package{"url"}
                 if not isNil url:
                     let clinetResponse = client.get("https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "") & "/releases/latest")
-                    echo clinetResponse.status
                     if clinetResponse.status == "404 Not Found":
-                        echo "No Releases"
+                        echo "-> 404 - no releases for: " & name
                         continue
                     if clinetResponse.status == "200 OK":
                         let githubRelease = parseJSON(clinetResponse.body)
                         let version = githubRelease{"tag_name"}
                         if isNil version:
+                            echo "-> 200 - cannot obtain version for: " & name
                             continue
                         else:
-                            writeFile("/home/runner/work/nimble-badge/nimble-badge/badges/" & package["name"].getStr() & ".svg", adjustVersion(version.getStr()))
+                            let versionstring = version.getStr()
+                            echo "-> 200 - " & name & " - " & versionstring
+                            writeFile("/home/runner/work/nimble-badge/nimble-badge/badges/" & name & ".svg", adjustVersion(versionstring))
                             updatedN += 1
+                else:
+                    echo "Skipping package without URL: " & name
+            else:
+                echo "Skipping alias package: " & name
         echo "Updated " & $updatedN & " badges"
 
 
