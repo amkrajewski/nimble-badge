@@ -15,6 +15,8 @@ jobs:
         with:
           fetch-depth: 2
           submodules: 'recursive'
+      - name: Update packages submodule
+        run: git submodule update --remote --merge
       - uses: jiro4989/setup-nim-action@v1
         with:
           nim-version: '2.0.0'
