@@ -65,7 +65,7 @@ when isMainModule:
             if isNil package{"alias"}:
                 let url = package{"url"}
                 if not isNil url:
-                    let clinetResponse = client.get("https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "") & "/releases/latest")
+                    let clinetResponse = client.get("https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "").replace(".git", "") & "/releases/latest")
                     if clinetResponse.status == "404 Not Found":
                         echo "-> 404 - no releases for: " & name
                         continue
