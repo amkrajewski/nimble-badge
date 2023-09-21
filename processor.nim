@@ -13,8 +13,10 @@ proc echoHelp() = echo """
 To use form command line, plase provide parameters. Currently supported usage:
 
 --deployBadges N    | -db N    --> Deploy badges for 500 packages in the nimble packages repo starting 
-                                   from Nth 500 (N<=9 for now). This is to avoid rate limiting.
+                                   from Nth 500 (N<=9 for now). This is to avoid rate limiting. This 
+                                   parameter must be first if multiple are provided.
 --versionLengthTest | -vlt     --> Test how version length affects text placement
+--verbose           | -vrb     --> A bit more verbose output
 
 """
 
@@ -22,6 +24,8 @@ when isMainModule:
     let args = commandLineParams()
     if args.len == 0:
         echoHelp()
+
+    let verbose: bool = "--verbose" in args or "-vrb" in args
 
     if "--versionLengthTest" in args or "-vlt" in args:
         echo "Testing how version length affects text placement"
@@ -65,25 +69,33 @@ when isMainModule:
             if isNil package{"alias"}:
                 let url = package{"url"}
                 if not isNil url:
-                    let clinetResponse = client.get("https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "").replace(".git", "") & "/releases/latest")
+                    let query = "https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "").replace(".git", "") & "/tags"
+                    if verbose: 
+                        echo query
+                    let clinetResponse = client.get(query)
+                    if verbose: 
+                        echo clinetResponse.status
                     if clinetResponse.status == "404 Not Found":
                         echo "-> 404 - no releases for: " & name
                         continue
                     if clinetResponse.status == "200 OK":
-                        let githubRelease = parseJSON(clinetResponse.body)
-                        let version = githubRelease{"tag_name"}
+                        let githubTagJSON = parseJSON(clinetResponse.body)
+                        if githubTagJSON.len == 0:
+                            echo "-> 200 - but no tags for: " & name
+                            continue
+                        let version = githubTagJSON[0]{"name"}
                         if isNil version:
-                            echo "-> 200 - cannot obtain version for: " & name
+                            echo "-> 200 - but cannot obtain version for: " & name
                             continue
                         else:
                             let versionstring = version.getStr()
                             echo "-> 200 - " & name & " - " & versionstring
-                            writeFile("/home/runner/work/nimble-badge/nimble-badge/badges/" & name & ".svg", adjustVersion(versionstring))
+                            writeFile("badges/" & name & ".svg", adjustVersion(versionstring))
                             updatedN += 1
                 else:
-                    echo "Skipping package without URL: " & name
+                    echo "-> Skipping package without URL: " & name
             else:
-                echo "Skipping alias package: " & name
+                echo "-> Skipping alias package: " & name
         echo "Updated " & $updatedN & " badges"
 
 
