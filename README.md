@@ -18,3 +18,10 @@ I played a bit with automating the process for people relying on a small script 
 To use it simply replace below `<<name>>` with your Nimble package name
 
         <img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/<<name>>.svg" height="24"/>
+
+## Some Examples
+
+- **nim**:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/nim.svg" height="24"/>
+- **nimble**: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/nimble.svg" height="24"/>
+- **inim**: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/inim.svg" height="24"/>
+- **arraymancer**:&nbsp; <img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/arraymancer.svg" height="24"/>
