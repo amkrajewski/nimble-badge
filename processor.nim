@@ -46,7 +46,7 @@ when isMainModule:
         let max = args[1].parseInt * 500
         var client = newHttpClient()
         let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
-
+        var updatedN: int = 0
         for i in min .. max:
             if i >= packagesJSON.len:
                 echo "Reached end of packages"
@@ -67,6 +67,8 @@ when isMainModule:
                             continue
                         else:
                             writeFile("badges/" & package["name"].getStr() & ".svg", adjustVersion(version.getStr()))
+                            updatedN += 1
+        echo "Updated " & $updatedN & " badges"
 
 
 
