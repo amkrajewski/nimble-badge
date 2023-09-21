@@ -42,11 +42,15 @@ when isMainModule:
         writeFile("testFiles/somenimbleV222222.svg", adjustVersion("v22.22.22"))
 
     if "--deployBadges" in args or "-db" in args:
+        
+        var client = newHttpClient()
+        client.headers = newHttpHeaders({"authorization": "Bearer ${{ secrets.GITHUB_TOKEN }}"})
+
+        let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
+        
+        var updatedN: int = 0
         let min = (args[1].parseInt - 1) * 500
         let max = args[1].parseInt * 500
-        var client = newHttpClient()
-        let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
-        var updatedN: int = 0
         for i in min .. max:
             if i >= packagesJSON.len:
                 echo "Reached end of packages"
