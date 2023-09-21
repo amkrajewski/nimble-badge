@@ -20,6 +20,10 @@ To use it simply replace below `<<name>>` with your Nimble package name
 
         <img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/<<name>>.svg" height="24">
 
+## Host a Mirror
+
+To host a mirror of this repository, you can simply (1) fork it, (2) allow Actions, and (3) make sure they have _write_ permissions to the repositoy. Done! The rest should be all automatic based on the schedule! You can trigger them manually as well.
+
 ## Some Examples
 
 - **nim**:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/nim.svg" height="24">
