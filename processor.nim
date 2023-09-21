@@ -2,7 +2,6 @@ import std/strutils
 import std/os
 import std/httpclient
 import std/json
-import std/times
 
 let entireFile = readFile("nimble.svg")
 
