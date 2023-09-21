@@ -46,7 +46,7 @@ when isMainModule:
             echo "Please provide a number after --deployBadges or -db"
             quit(1)
         
-        let packagesJSON = parseJSON("packages/packages.json")
+        let packagesJSON = parseFile("packages/packages.json")
         echo "Total packages: " & $packagesJSON.len
 
         var client = newHttpClient()
