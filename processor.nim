@@ -46,20 +46,24 @@ when isMainModule:
             echo "Please provide a number after --deployBadges or -db"
             quit(1)
         
-        var client = newHttpClient()
-        
-        let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
+        let packagesJSON = parseJSON("packages/packages.json")
+        echo "Total packages: " & $packagesJSON.len
 
+        var client = newHttpClient()
         client.headers = newHttpHeaders({"authorization": "Bearer " & os.getEnv("GITHUB_TOKEN")})
 
         var updatedN: int = 0
         let min = (args[1].parseInt - 1) * 500
         let max = args[1].parseInt * 500
+        echo "Updating badges from " & $min & " to " & $max
+        
         for i in min .. max:
             if i >= packagesJSON.len:
                 echo "Reached end of packages"
                 break
             let package = packagesJSON[i]
+            if i == 0:
+                echo "First package JSON:", $package
             if isNil package{"alias"}:
                 let url = package{"url"}
                 if not isNil url:
