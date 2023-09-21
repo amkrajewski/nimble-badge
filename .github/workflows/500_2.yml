@@ -1,8 +1,9 @@
-name: Everyday at 2am
+name: Everyday at 2am pm
 
 on:
   schedule:
       - cron: '0 2 * * *'
+      - cron: '0 14 * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,6 +16,8 @@ jobs:
         with:
           nim-version: '2.0.0'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          env:
+            GITHUB_TOKEN: ${{ github.token }}
       - name: Generate Badges
         run: nim c -r -d:ssl processor.nim -db 2
       - name: Commit changes with Add & Commit
