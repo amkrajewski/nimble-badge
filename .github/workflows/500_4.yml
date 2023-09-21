@@ -16,6 +16,8 @@ jobs:
           nim-version: '2.0.0'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate Badges
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
         run: nim c -r -d:ssl processor.nim -db 4
       - name: Commit changes with Add & Commit
         uses: EndBug/add-and-commit@v9
