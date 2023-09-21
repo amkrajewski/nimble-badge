@@ -76,7 +76,7 @@ when isMainModule:
                     if verbose: 
                         echo clinetResponse.status
                     if clinetResponse.status == "404 Not Found":
-                        echo "-> 404 - no releases for: " & name
+                        echo "-> 404 - could not resolve URL: " & name
                         continue
                     if clinetResponse.status == "200 OK":
                         let githubTagJSON = parseJSON(clinetResponse.body)
