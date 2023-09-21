@@ -1,5 +1,8 @@
 import std/strutils
 import std/os
+import std/httpclient
+import std/json
+import std/times
 
 let entireFile = readFile("nimble.svg")
 
@@ -12,6 +15,8 @@ proc adjustVersion(v: string): string =
 proc echoHelp() = echo """
 To use form command line, provide parameters. Currently supported usage:
 
+--deployBadges N    | -db N    --> Deploy badges for 1000 packages in the nimble packages repo
+                                   starting from Nth thousand. This is to avoid rate limiting.
 --versionLengthTest | -vlt     --> Test how version length affects text placement
 
 
@@ -36,3 +41,34 @@ when isMainModule:
         writeFile("testFiles/somenimbleV2222.svg", adjustVersion("v2.2.22"))
         writeFile("testFiles/somenimbleV22222.svg", adjustVersion("v2.22.22"))
         writeFile("testFiles/somenimbleV222222.svg", adjustVersion("v22.22.22"))
+
+    if "--deployBadges" in args or "-db" in args:
+        let min = (args[1].parseInt - 1) * 1000
+        let max = args[1].parseInt * 1000
+        var client = newHttpClient()
+        let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
+
+        for i in min .. max:
+            if i >= packagesJSON.len:
+                echo "Reached end of packages"
+                break
+            let package = packagesJSON[i]
+            if isNil package{"alias"}:
+                let url = package{"url"}
+                if not isNil url:
+                    let clinetResponse = client.get("https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "") & "/releases/latest")
+                    echo clinetResponse.status
+                    if clinetResponse.status == "404 Not Found":
+                        echo "No Releases"
+                        continue
+                    if clinetResponse.status == "200 OK":
+                        let githubRelease = parseJSON(clinetResponse.body)
+                        let version = githubRelease{"tag_name"}
+                        if isNil version:
+                            continue
+                        else:
+                            writeFile("badges/" & package["name"].getStr() & ".svg", adjustVersion(version.getStr()))
+
+
+
+
