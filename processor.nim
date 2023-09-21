@@ -15,7 +15,7 @@ proc adjustVersion(v: string): string =
 proc echoHelp() = echo """
 To use form command line, provide parameters. Currently supported usage:
 
---deployBadges N    | -db N    --> Deploy badges for 1000 packages in the nimble packages repo
+--deployBadges N    | -db N    --> Deploy badges for 500 packages in the nimble packages repo
                                    starting from Nth thousand. This is to avoid rate limiting.
 --versionLengthTest | -vlt     --> Test how version length affects text placement
 
@@ -43,8 +43,8 @@ when isMainModule:
         writeFile("testFiles/somenimbleV222222.svg", adjustVersion("v22.22.22"))
 
     if "--deployBadges" in args or "-db" in args:
-        let min = (args[1].parseInt - 1) * 1000
-        let max = args[1].parseInt * 1000
+        let min = (args[1].parseInt - 1) * 500
+        let max = args[1].parseInt * 500
         var client = newHttpClient()
         let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
 
