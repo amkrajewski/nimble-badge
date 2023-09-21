@@ -25,3 +25,10 @@ To use it simply replace below `<<name>>` with your Nimble package name
 - **nimble**: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/nimble.svg" height="24"/>
 - **inim**: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/inim.svg" height="24"/>
 - **arraymancer**:&nbsp; <img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/arraymancer.svg" height="24"/>
+
+## Notes:
+
+- Aliases are skipped and will not show up in badges for conciseness.
+- **`.nimble` files are not parsed and version stored in them is ignored. This is intended behavior established by nible [per their contribution requirements](https://github.com/nim-lang/packages/#releasing-a-new-package-version) which require you to _git tag_ your release.**
+- As of September 2023, when iterating over `packages.json`, around half of packages does not resovle version using [the procedure described above](#automatic-versioning-deployment). By far, the majority of misses are because _git tags_ are missing from the repo, desipte nimble requirements.
+- Ocassionally, e.g. [neverwinter.nim](https://github.com/niv/neverwinter.nim), I noticed that the tags returned with GitHub API are behind what web page returns. No idea why, beyond that maybe `.` ibnterferes with API, and I would appreciate some insight.
