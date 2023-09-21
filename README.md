@@ -31,6 +31,13 @@ To host a mirror of this repository, you can simply (1) fork it, (2) allow Actio
 - **inim**: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/inim.svg" height="24">
 - **arraymancer**:&nbsp; <img src="https://raw.githubusercontent.com/amkrajewski/nimble-badge/master/badges/arraymancer.svg" height="24">
 
+## Current Status:
+
+**Last Run Success/Fail:**&nbsp;&nbsp;[![Everyday at 1am pm](https://github.com/amkrajewski/nimble-badge/actions/workflows/first500.yml/badge.svg)](https://github.com/amkrajewski/nimble-badge/actions/workflows/first500.yml)
+
+**Last Updated:**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![GitHub last commit (branch)](https://img.shields.io/github/last-commit/amkrajewski/nimble-badge/master)
+
+
 ## Notes:
 
 - Aliases are skipped and will not show up in badges for conciseness.
