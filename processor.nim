@@ -46,8 +46,8 @@ when isMainModule:
         var client = newHttpClient()
         
         let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
-        
-        client.headers = newHttpHeaders({"authorization": "Bearer ${{ secrets.GITHUB_TOKEN }}"})
+
+        client.headers = newHttpHeaders({"authorization": "Bearer " & os.getEnv("GITHUB_TOKEN")})
 
         var updatedN: int = 0
         let min = (args[1].parseInt - 1) * 500
