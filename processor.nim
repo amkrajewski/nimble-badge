@@ -44,10 +44,11 @@ when isMainModule:
     if "--deployBadges" in args or "-db" in args:
         
         var client = newHttpClient()
-        client.headers = newHttpHeaders({"authorization": "Bearer ${{ secrets.GITHUB_TOKEN }}"})
-
+        
         let packagesJSON = parseJSON(client.get("http://raw.githubusercontent.com/nim-lang/packages/master/packages.json").body)
         
+        client.headers = newHttpHeaders({"authorization": "Bearer ${{ secrets.GITHUB_TOKEN }}"})
+
         var updatedN: int = 0
         let min = (args[1].parseInt - 1) * 500
         let max = args[1].parseInt * 500
