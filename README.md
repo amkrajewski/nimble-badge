@@ -11,7 +11,7 @@ You can change it to whatever you desire by opening the _raw_ SVG at this reposi
 
 
 ## Automatic Versioning Deployment
-I played a bit with automating the process for people relying on a small script written in, obviously, Nim, utilized in GitHub Actions. I got to the point where it seems both pretty usable and stable. In short, during the workflow, `nim-lang/packages` submodule is updated, and its `packages.json` is parsed to obtain links to all Nimble repositories. Then I iterate to (1) get `tag_name` version string from latest release of each repository, (2) adjust the version string in SVG, (3) adjust its position, (4) store the result in `/badges` under `<<name>>.svg`. Git is then used to detect changes and commit new/updated badges.
+I played a bit with automating the process for people relying on a small script written in, obviously, Nim, utilized in GitHub Actions. I got to the point where it seems both pretty usable and stable. In short, during the workflow, `nim-lang/packages` submodule is updated, and its `packages.json` is parsed to obtain links to all Nimble repositories. Then I iterate to (1) get `name` version string from latest _tag_ of each repository, (2) adjust the version string in SVG, (3) adjust its position, (4) store the result in `/badges` under `<<name>>.svg`. Git is then used to automatically detect diff (changes) and commit new/updated badges.
 
 >Note: The release version is obtained with a call to GitHub API, which has an hourly rate limit (free version), so the script is running with windows of 500. It runs twice a day (1-6 am/pm UTC) on the first 3,000 Nimble packages (there are 2,264 as of September 2023), but can be quickly extended to 6,000.
 
