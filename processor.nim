@@ -6,7 +6,7 @@ import std/times
 
 let rootSVG = readFile("nimble.svg")
 
-proc adjustVersion(v: string): string =
+proc adjustVersion(v: string, rootSVG: string = rootSVG): string =
     let displacement: float = 145 + ((v.len.float - 8.0) * 23)
     result = rootSVG.replace("v1.11.11", v).replace("154.131839", $displacement)
 
@@ -95,7 +95,9 @@ when isMainModule:
                         else:
                             let versionstring = version.getStr()
                             echo "-> 200 - " & name & " - " & versionstring
-                            writeFile("badges/" & name & ".svg", adjustVersion(versionstring))
+                            writeFile("badges/" & name & ".svg",
+                                      adjustVersion(versionstring)
+                                      .replace("https://github.com/amkrajewski/nimble-badge", url.getStr()))
                             updatedN += 1
                 else:
                     echo "-> Skipping package without URL: " & name
