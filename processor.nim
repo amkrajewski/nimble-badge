@@ -74,14 +74,19 @@ when isMainModule:
                     var query: string
                     if "github" in urlString:
                         query = "https://api.github.com/repos/" & 
-                                urlString.replace("https://github.com/", "").replace(".git", "") & "/tags"
+                                urlString
+                                .replace("https://github.com/", "")
+                                .replace(".git", "") & 
+                                "/tags"
+                        query = query.replace("//", "/")
                     elif "gitlab" in urlString:
                         query = "https://gitlab.com/api/v4/projects/" & 
                                 urlString
                                 .replace("https://gitlab.com/", "")
                                 .replace(".git", "")
-                                .replace("/", "%2F") & 
+                                .replace("/", "%2F")  & 
                                 "/repository/tags"
+                        query = query.replace("//", "/")
                     else:
                         echo "-> API not implemented: " & name
                         continue
