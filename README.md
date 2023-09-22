@@ -40,6 +40,7 @@ To host a mirror of this repository, you can simply (1) fork it, (2) allow Actio
 
 ## Notes:
 
+- Currently, version is obtained through API calls to GitHub or GitLab, so only these are supported. Please do a PR if you would like to add handling of additional repo hosting platforms.
 - Aliases are skipped and will not show up in badges for conciseness.
 - **`.nimble` files are not parsed, and the version stored in them is ignored. This is intended behavior established by nimble [per their contribution requirements](https://github.com/nim-lang/packages/#releasing-a-new-package-version), which requires you to _git tag_ your release.**
 - As of September 2023, when iterating over `packages.json`, around half of the packages do not resolve the version using [the procedure described above](#automatic-versioning-deployment). By far, the majority of misses are because _git tags_ are missing from the repo, despite nimble requirements.
