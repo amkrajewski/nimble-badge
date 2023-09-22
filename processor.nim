@@ -79,6 +79,7 @@ when isMainModule:
                                 .replace(".git", "") & 
                                 "/tags"
                         query = query.replace("//", "/").replace(":/", "://")
+                        client.headers = newHttpHeaders({"authorization": "Bearer " & os.getEnv("GITHUB_TOKEN")})
                     elif "gitlab" in urlString:
                         query = "https://gitlab.com/api/v4/projects/" & 
                                 urlString
@@ -87,6 +88,7 @@ when isMainModule:
                                 .replace("/", "%2F")  & 
                                 "/repository/tags"
                         query = query.replace("//", "/").replace(":/", "://")
+                        client = newHttpClient()
                     else:
                         echo "-> API not implemented: " & name
                         continue
