@@ -70,7 +70,21 @@ when isMainModule:
             if isNil package{"alias"}:
                 let url = package{"url"}
                 if not isNil url:
-                    let query = "https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "").replace(".git", "") & "/tags"
+                    let urlString = url.getStr()
+                    var query: string
+                    if "github" in urlString:
+                        query = "https://api.github.com/repos/" & 
+                                urlString.replace("https://github.com/", "").replace(".git", "") & "/tags"
+                    elif "gitlab" in urlString:
+                        query = "https://gitlab.com/api/v4/projects/" & 
+                                urlString
+                                .replace("https://gitlab.com/", "")
+                                .replace(".git", "")
+                                .replace("/", "%2F") & 
+                                "/repository/tags"
+                    else:
+                        echo "-> API not implemented: " & name
+                        continue
                     if verbose: 
                         echo query
                     sleep(200)
@@ -83,24 +97,24 @@ when isMainModule:
                     if clinetResponse.status == "200 OK":
                         let githubTagJSON = parseJSON(clinetResponse.body)
                         if githubTagJSON.kind != JArray:
-                            echo "-> 200 - but not JArray of tags: " & name
+                            echo "-> OK - but not JArray of tags: " & name
                             continue
                         if githubTagJSON.len == 0:
-                            echo "-> 200 - but no tags for: " & name
+                            echo "-> OK - but no tags for: " & name
                             continue
                         let version = githubTagJSON[0]{"name"}
                         if isNil version:
-                            echo "-> 200 - but cannot obtain version for: " & name
+                            echo "-> OK - but cannot obtain version for: " & name
                             continue
                         else:
                             let versionstring = version.getStr()
-                            echo "-> 200 - " & name & " - " & versionstring
+                            echo "-> OK - " & name & " - " & versionstring
                             writeFile("badges/" & name & ".svg",
                                       adjustVersion(versionstring)
-                                      .replace("https://github.com/amkrajewski/nimble-badge", url.getStr()))
+                                      .replace("https://github.com/amkrajewski/nimble-badge", urlString))
                             updatedN += 1
                 else:
-                    echo "-> Skipping package without URL: " & name
+                    echo "-> Skipping package without a URL: " & name
             else:
                 echo "-> Skipping alias package: " & name
         echo "Updated " & $updatedN & " badges"
