@@ -1,7 +1,7 @@
 # Nimble Badge
 
 **TLDR:**
-Hi! This fork of [@yglukhov](https://github.com/yglukhov)'s [nimble-tag repository](https://github.com/yglukhov/nimble-tag) extends the original graphical design by Amy Shaw (in [this PR](https://github.com/yglukhov/nimble-tag/pull/1)). It (1) adds versioning to the badge, (2) [automates the process](#automatic-versioning-deployment) with a small pure-Nim tool `processor.nim` I wrote, and (3) statically hosts badges for all Nimble packages under [`badges`](https://github.com/amkrajewski/nimble-badge/tree/master/badges) (updated every 12h). Unsolicited feedback, pull requests, and forking are encouraged 😊
+Hi! This fork of [@yglukhov](https://github.com/yglukhov)'s [nimble-tag repository](https://github.com/yglukhov/nimble-tag) extends the original graphical design by Amy Shaw (in [this PR](https://github.com/yglukhov/nimble-tag/pull/1)). It (1) adds versioning to the badge, (2) embeds a hyperlink to the reposiotry into the SVG, (3) [automates the process](#automatic-versioning-deployment) with a small pure-Nim tool `processor.nim` I wrote, and (4) statically hosts badges for all Nimble packages under [`badges`](https://github.com/amkrajewski/nimble-badge/tree/master/badges) (updated every 12h). Unsolicited feedback, pull requests, and forking are encouraged 😊
 
 <img src="nimble.svg" height="24">
 
