@@ -2,6 +2,7 @@ import std/strutils
 import std/os
 import std/httpclient
 import std/json
+import std/times
 
 let rootSVG = readFile("nimble.svg")
 
@@ -72,6 +73,7 @@ when isMainModule:
                     let query = "https://api.github.com/repos/" & url.getStr().replace("https://github.com/", "").replace(".git", "") & "/tags"
                     if verbose: 
                         echo query
+                    sleep(200)
                     let clinetResponse = client.get(query)
                     if verbose: 
                         echo clinetResponse.status
