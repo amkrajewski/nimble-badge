@@ -78,7 +78,7 @@ when isMainModule:
                                 .replace("https://github.com/", "")
                                 .replace(".git", "") & 
                                 "/tags"
-                        query = query.replace("//", "/")
+                        query = query.replace("//", "/").replace(":/", "://")
                     elif "gitlab" in urlString:
                         query = "https://gitlab.com/api/v4/projects/" & 
                                 urlString
@@ -86,7 +86,7 @@ when isMainModule:
                                 .replace(".git", "")
                                 .replace("/", "%2F")  & 
                                 "/repository/tags"
-                        query = query.replace("//", "/")
+                        query = query.replace("//", "/").replace(":/", "://")
                     else:
                         echo "-> API not implemented: " & name
                         continue
