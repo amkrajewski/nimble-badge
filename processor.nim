@@ -51,7 +51,7 @@ when isMainModule:
         let packagesJSON = parseFile("packages/packages.json")
         echo "Total packages: " & $packagesJSON.len
 
-        var client = newHttpClient()
+        var client = newHttpClient(timeout=10000)
         client.headers = newHttpHeaders({"authorization": "Bearer " & os.getEnv("GITHUB_TOKEN")})
 
         var updatedN: int = 0
@@ -88,13 +88,13 @@ when isMainModule:
                                 .replace("/", "%2F")  & 
                                 "/repository/tags"
                         query = query.replace("//", "/").replace(":/", "://")
-                        client = newHttpClient()
+                        client = newHttpClient(timeout=10000)
                     else:
                         echo "-> API not implemented: " & name
                         continue
                     if verbose: 
                         echo query
-                    sleep(200)
+                    sleep(100)
                     let clinetResponse = client.get(query)
                     if verbose: 
                         echo clinetResponse.status
