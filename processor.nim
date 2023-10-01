@@ -7,8 +7,16 @@ import std/times
 let rootSVG = readFile("nimble.svg")
 
 proc adjustVersion(v: string, rootSVG: string = rootSVG): string =
-    let displacement: float = 145 + ((v.len.float - 8.0) * 23)
-    result = rootSVG.replace("v1.11.11", v).replace("154.131839", $displacement)
+    if v.len < 10:
+        let displacement: float = 145 + ((v.len.float - 8.0) * 23)
+        result = rootSVG.replace("v1.11.11", v).replace("154.131839", $displacement)
+    else:
+        let newFont: float = 63 * (8.75 / v.len.float)
+        let centering: float = 382 - newFont.float * 0.5
+        result = rootSVG.replace("v1.11.11", v)
+                        .replace("154.131839", "165")
+                        .replace("350.01234", $centering)
+                        .replace("63.01234", $newFont)
 
 proc echoHelp() = echo """
 To use form command line, plase provide parameters. Currently supported usage:
