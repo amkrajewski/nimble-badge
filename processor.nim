@@ -30,18 +30,9 @@ when isMainModule:
 
     if "--versionLengthTest" in args or "-vlt" in args:
         echo "Testing how version length affects text placement"
-        writeFile("testFiles/somenimbleV1.svg", adjustVersion("v1"))
-        writeFile("testFiles/somenimbleV11.svg", adjustVersion("v1.1"))
-        writeFile("testFiles/somenimbleV111.svg", adjustVersion("v1.1.1"))
-        writeFile("testFiles/somenimbleV1111.svg", adjustVersion("v1.1.11"))
-        writeFile("testFiles/somenimbleV11111.svg", adjustVersion("v1.11.11"))
-        writeFile("testFiles/somenimbleV111111.svg", adjustVersion("v11.11.11"))
-        writeFile("testFiles/somenimbleV2.svg", adjustVersion("v2"))
-        writeFile("testFiles/somenimbleV22.svg", adjustVersion("v2.2"))
-        writeFile("testFiles/somenimbleV222.svg", adjustVersion("v2.2.2"))
-        writeFile("testFiles/somenimbleV2222.svg", adjustVersion("v2.2.22"))
-        writeFile("testFiles/somenimbleV22222.svg", adjustVersion("v2.22.22"))
-        writeFile("testFiles/somenimbleV222222.svg", adjustVersion("v22.22.22"))
+        for version in ["v1", "v1.1", "v1.1.1", "v1.1.11", "v1.11.11", "v11.11.11", 
+                        "v2", "v2.2", "v2.2.2", "v2.2.22", "v2.22.22", "v22.22.22"]:
+            writeFile("testFiles/somenimble" & version.replace(".", "").replace("v", "V") & ".svg", adjustVersion(version))
 
     if "--deployBadges" in args or "-db" in args:
         if args.len < 2 or not args[1][0].isDigit:
