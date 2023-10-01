@@ -39,7 +39,8 @@ when isMainModule:
     if "--versionLengthTest" in args or "-vlt" in args:
         echo "Testing how version length affects text placement"
         for version in ["v1", "v1.1", "v1.1.1", "v1.1.11", "v1.11.11", "v11.11.11", 
-                        "v2", "v2.2", "v2.2.2", "v2.2.22", "v2.22.22", "v22.22.22"]:
+                        "v2", "v2.2", "v2.2.2", "v2.2.22", "v2.22.22", "v22.22.22",
+                        "2023.1.1", "2023.11.1", "2023.11.11", "v2023.11.11", "v2023.11.11.post2"]:
             writeFile("testFiles/somenimble" & version.replace(".", "").replace("v", "V") & ".svg", adjustVersion(version))
 
     if "--deployBadges" in args or "-db" in args:
