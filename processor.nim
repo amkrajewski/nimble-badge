@@ -12,7 +12,7 @@ proc adjustVersion(v: string, rootSVG: string = rootSVG): string =
         result = rootSVG.replace("v1.11.11", v).replace("154.131839", $displacement)
     else:
         let newFont: float = 63 * (8.75 / v.len.float)
-        let centering: float = 382 - newFont.float * 0.5
+        let centering: float = 382 - newFont.float * 0.6
         result = rootSVG.replace("v1.11.11", v)
                         .replace("154.131839", "165")
                         .replace("350.01234", $centering)
