@@ -24,6 +24,7 @@ To use form command line, plase provide parameters. Currently supported usage:
 --deployBadges N    | -db N    --> Deploy badges for 500 packages in the nimble packages repo starting 
                                    from Nth 500 (N<=9 for now). This is to avoid rate limiting. This 
                                    parameter must be first if multiple are provided.
+--deploy V          | -d V     --> Deploy one badge for a specific version V and save it to versionedBadge.svg
 --versionLengthTest | -vlt     --> Test how version length affects text placement
 --verbose           | -vrb     --> A bit more verbose output
 
@@ -125,6 +126,15 @@ when isMainModule:
             else:
                 echo "-> Skipping alias package: " & name
         echo "Updated " & $updatedN & " badges"
+    
+    if "--deploy" in args or "-d" in args:
+        if args.len < 2:
+            echo "Please provide a version after --deploy or -d"
+            quit(1)
+        let version = args[1]
+        echo "Deploying badge for version: " & version
+        writeFile("versionedBadge.svg", adjustVersion(version))
+        echo "Done!"
 
 
 
