@@ -59,3 +59,15 @@ To host a mirror of this repository, you can simply (1) fork it, (2) allow Actio
 - If you wonder why your badge is missing and this README is not helping, please first go through the last workflow printouts you can find under `Actions > Everyday at Xam pm > <<last run>> > generateBadges > Generate Badges`. The package should be under one of the `X` workers.
 - I know the replacing charcaters at _a priori_ known positions can be done faster than with regex running every time, but it insignificant overhead here, while (1) keeping things clean and (2) allowing people forking to simply tune style of the base SVG to their needs without `processor.nim` modifications.
 - Unsolicited feedback, pull requests, and forking are encouraged 😊
+
+## Alternative Fonts:
+
+Big thanks to @dissolvedgirl on Nim Discord who brought to my attention that the badge renders neither correctly nor pretty on systems with no `PT Sans Caption` installed. I've noticed it also happens on, for instance, iPhones. I've tested alternatives (see `withDifferentFonts` directory) and a quick fix I implemented is the following list of typeface fallbacks embedded in the badge:
+
+1. PT Sans Caption: <img src="withDifferentFonts/nimble-original.svg" height="24"> (original)
+1. Tahoma: <img src="withDifferentFonts/nimble-Tahoma.svg" height="24">
+1. Helvetica Neue Medium: <img src="withDifferentFonts/nimble-HelveticaNeueMedium.svg" height="24">
+1. PT Sans: <img src="withDifferentFonts/nimble-PTSans.svg" height="24">
+1. (system sans-serif fallback): <img src="withDifferentFonts/nimble-sansserifFallback.svg" height="24">
+1. (plain default font): <img src="withDifferentFonts/nimble-unrecognized.svg" height="24">
+
