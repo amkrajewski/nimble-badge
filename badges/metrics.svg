@@ -1,5 +1,5 @@
 <svg width="675" height="90" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
- <a xlink:href="https://github.com/status-im/nim-taskpools">
+ <a xlink:href="https://github.com/status-im/nim-metrics">
   <g>
    <title>Layer 1</title>
    <path fill="#CEB54D" id="svg_15" d="m662.12305,89.15867l-310.50015,0c-6.59998,0 -12,-5.40002 -12,-12l0,-64.10003c0,-6.59998 5.40002,-12 12,-12l310.40005,0c6.6001,0 12,5.40002 12,12l0,64.10003c0.1001,6.59998 -5.29999,12 -11.8999,12z"/>
@@ -22,7 +22,7 @@
     </g>
    </g>
    <text x="-442" y="-350.02132" id="svg_16" font-size="63px" font-family="'PT Sans Caption', 'Tahoma', 'Helvetica Neue Medium', 'PT Sans', sans-serif" fill="#CEB54D" class="st1 st2 st3" transform="matrix(1 0 0 1 546.13 420.879)">NIMBLE</text>
-   <text x="-99.0" y="-350.01234" id="svg_17" font-size="63.01234px" font-family="'PT Sans Caption', 'Tahoma', 'Helvetica Neue Medium', 'PT Sans', sans-serif" fill="#000000" class="st1 st2 st3" transform="matrix(1 0 0 1 546.13 420.879)">v0.1.0</text>
+   <text x="-99.0" y="-350.01234" id="svg_17" font-size="63.01234px" font-family="'PT Sans Caption', 'Tahoma', 'Helvetica Neue Medium', 'PT Sans', sans-serif" fill="#000000" class="st1 st2 st3" transform="matrix(1 0 0 1 546.13 420.879)">v0.1.2</text>
   </g>
  </a>
 </svg>
